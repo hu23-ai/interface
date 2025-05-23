@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>인터페이스 - 문제 목록</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/about.css" />
+  <style>
+    body {
+      background: #f7fafd;
+    }
+    .about-container {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      min-height: 670px;
+      padding-top: 32px;
+    }
+    .intro-text {
+      background: #fff;
+      box-shadow: 0 4px 16px rgba(32,80,170,0.08);
+      border-radius: 18px;
+      padding: 42px 40px 32px 40px;
+      width: 100%;
+      max-width: 950px;
+    }
+    .intro-text h1 {
+      font-size: 2.1rem;
+      color: #1a237e;
+      margin-bottom: 24px;
+      font-weight: bold;
+      letter-spacing: -1px;
+    }
+    .problem-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(32,80,170,0.04);
+    }
+    .problem-table thead th {
+      background: #e3ebfb;
+      color: #26336e;
+      padding: 16px 8px;
+      font-size: 1.06rem;
+      text-align: left;
+      font-weight: 600;
+      border-bottom: 2px solid #bbcaf5;
+    }
+    .problem-table tbody tr {
+      transition: background 0.15s;
+    }
+    .problem-table tbody tr:hover {
+      background: #f2f7ff;
+    }
+    .problem-table td {
+      padding: 13px 8px;
+      border-bottom: 1px solid #f0f0f5;
+      font-size: 1.05rem;
+      color: #222;
+    }
+    .lang-badge {
+      background: #357ae8;
+      color: #fff;
+      border-radius: 4px;
+      padding: 3px 10px;
+      font-size: 0.98em;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      margin-right: 6px;
+      display: inline-block;
+    }
+    .star {
+      color: #ffbe4b;
+      font-size: 1.16em;
+    }
+    .solve-link {
+      color: #2a77d4;
+      text-decoration: underline;
+      font-weight: 500;
+      transition: color 0.18s;
+    }
+    .solve-link:hover {
+      color: #1c3c7c;
+    }
+    @media (max-width: 700px) {
+      .intro-text { padding: 20px 6px; }
+      .problem-table thead th, .problem-table td { font-size: 0.96em; padding: 9px 4px; }
+    }
+  </style>
+</head>
+<body>
+ <header class="header">
+  <div class="nav-wrapper">
+    <a href="index.html" class="logo-link">
+      <img src="../img/interface_logo.png" alt="인터페이스 로고" width="30" class="logo-img">
+      <span class="logo-text">인터페이스</span>
+    </a>
+    <nav>
+      <ul class="menu">
+        <li class="menu-item"><a href="#">About Us</a></li>
+        <li class="menu-item"><a href="#">커뮤니티</a></li>
+        <li class="menu-item"><a href="#">자료실</a></li>
+        <li class="menu-item"><a href="#">가입안내</a></li>
+        <li class="menu-item"><a href="#">기타사이트</a></li>
+      </ul>
+      <div class="dropdown-panel">
+        <div class="dropdown-inner">
+          <div class="dropdown-column">
+            <a href="about.html">소개</a>
+            <a href="event.html">행사</a>
+            <a href="#">CI</a>
+            <a href="come.html">Contact</a>
+          </div>
+          <div class="dropdown-column">
+            <a href="group.html">소모임</a>
+            <a href="notice_list.html">공지사항</a>
+            <a href="#">주요활동</a>
+            <a href="study.html">스터디</a>
+          </div>
+          <div class="dropdown-column">
+            <a href="rule.html">회칙</a>
+            <a href="#">오디오</a>
+            <a href="calender.html">캘린더</a>
+          </div>
+          <div class="dropdown-column">
+            <a href="#">지원하기</a>
+          </div>
+          <div class="dropdown-column">
+            <a href="chatbot.html">ai챗봇</a>
+            <a href="problem_list.html">코딩테스트</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main style="min-height: 670px;">
+  <section class="about-container">
+    <div class="intro-text">
+      <h1>문제 목록</h1>
+      <table class="problem-table">
+        <thead>
+          <tr>
+            <th>번호</th>
+            <th>문제 제목</th>
+            <th>난이도</th>
+            <th>지원 언어</th>
+            <th>바로가기</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Hello World를 출력하세요</td>
+            <td><span class="star">⭐</span></td>
+            <td><span class="lang-badge">Python</span></td>
+            <td><a href="problem1.html" class="solve-link">문제 풀기</a></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>두 수 a, b의 합을 반환하세요</td>
+            <td><span class="star">⭐</span></td>
+            <td><span class="lang-badge">Python</span></td>
+            <td><a href="problem2.html" class="solve-link">문제 풀기</a></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>중복 없는 가장 긴 부분 문자열의 길이</td>
+            <td><span class="star">⭐⭐</span></td>
+            <td><span class="lang-badge">Python</span></td>
+            <td><a href="problem3.html" class="solve-link">문제 풀기</a></td>
+          </tr>
+            <tr>
+            <td>4</td>
+            <td>중복 없는 가장 긴 부분 문자열의 길이</td>
+            <td><span class="star">⭐⭐⭐</span></td>
+            <td><span class="lang-badge">Python</span></td>
+            <td><a href="problem4.html" class="solve-link">문제 풀기</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <p>&copy; 2025 인터페이스. All rights reserved.</p>
+</footer>
+<script src="../js/main.js"></script>
+</body>
+</html>

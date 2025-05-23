@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>인터페이스 – 물건 대여</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/about.css" />
+  <style>
+/* ─── 물건 리스트 디자인 ─── */
+#item-list {
+  max-width: 600px;
+  margin: 2rem auto;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.item:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  transform: translateY(-2px);
+}
+
+.item-info {
+  display: flex;
+  flex-direction: column;
+}
+.item-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #222;
+}
+.item-stock {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 0.25rem;
+}
+
+.item-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+.item-actions button {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.rent-btn {
+  background-color: #007bff;
+  color: #fff;
+}
+.rent-btn:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+.rent-btn:disabled {
+  background-color: #a0c4ff;
+  cursor: not-allowed;
+}
+
+.return-btn {
+  background-color: #28a745;
+  color: #fff;
+}
+.return-btn:hover {
+  background-color: #1e7e34;
+}
+
+  </style>
+</head>
+<body>
+ <header class="header">
+  <div class="nav-wrapper">
+    <a href="index.html" class="logo-link">
+      <img src="../img/interface_logo.png" alt="인터페이스 로고" width="30" class="logo-img">
+      <span class="logo-text">인터페이스</span>
+    </a>
+    <nav>
+      <ul class="menu">
+        <li class="menu-item"><a href="#">About Us</a></li>
+        <li class="menu-item"><a href="#">커뮤니티</a></li>
+        <li class="menu-item"><a href="#">자료실</a></li>
+        <li class="menu-item"><a href="#">가입안내</a></li>
+        <li class="menu-item"><a href="#">기타사이트</a></li>
+      </ul>
+      <div class="dropdown-panel">
+        <div class="dropdown-inner">
+          <div class="dropdown-column">
+            <a href="about.html">소개</a>
+            <a href="event.html">행사</a>
+            <a href="#">CI</a>
+            <a href="come.html">Contact</a>
+          </div>
+          <div class="dropdown-column">
+            <a href="group.html">소모임</a>
+            <a href="notice_list.html">공지사항</a>
+            <a href="#">주요활동</a>
+            <a href="study.html">스터디</a>
+          </div>
+          <div class="dropdown-column">
+            <a href="rule.html">회칙</a>
+            <a href="#">오디오</a>
+            <a href="calender.html">캘린더</a>
+          </div>
+          <div class="dropdown-column">
+            <a href="#">지원하기</a>
+          </div>
+          <div class="dropdown-column">
+            <a href="chatbot.html">ai챗봇</a>
+            <a href="problem_list.html">코딩테스트</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+    <h1 style="text-align:center; margin-top:2rem;">📦물건 대여 목록</h1>
+    <div id="item-list"></div>
+</main>
+
+<footer class="footer">
+    <p>&copy; 2025 인터페이스. All rights reserved.</p>
+</footer>
+<script>
+  const API_URL ='https://script.google.com/macros/s/AKfycbwWS_VLLeEkRHzJfnifL8iuCZRGMgxMHP-WiNLq9BMBQGw7YF61F9gzaywGpaxvd65J/exec';
+
+  function jsonpLoad(src) {
+    const s = document.createElement('script');
+    s.src = src;
+    document.body.appendChild(s);
+  }
+
+  function handleResponse(resp) {
+    if (resp.error) {
+      alert(resp.error);
+    }
+    if (resp.items) {
+      renderList(resp.items);
+    }
+  }
+
+  function renderList(items) {
+    const listEl = document.getElementById('item-list');
+    listEl.innerHTML = '';
+    items.forEach(item => {
+      const div = document.createElement('div');
+      div.className = 'item';
+      div.innerHTML = `
+        <div class="item-info">
+          <span class="item-name">${item.name}</span>
+          <span class="item-stock">남은 수량: ${item.stock}개</span>
+        </div>
+        <div class="item-actions">
+          <button class="rent-btn">대여</button>
+          <button class="return-btn">반납</button>
+        </div>
+      `;
+      // 대여 버튼
+      div.querySelector('.rent-btn').addEventListener('click', () => {
+        const user = prompt('학번을 입력하세요:');
+        if (!user) return;
+        jsonpLoad(`${API_URL}?id=${item.id}&action=rent&user=${user}&callback=handleResponse`);
+      });
+      // 반납 버튼
+      div.querySelector('.return-btn').addEventListener('click', () => {
+        const user = prompt('학번을 입력하세요:');
+        if (!user) return;
+        jsonpLoad(`${API_URL}?id=${item.id}&action=return&user=${user}&callback=handleResponse`);
+      });
+      listEl.appendChild(div);
+    });
+  }
+
+  // 최초 한 번 불러오기
+  jsonpLoad(`${API_URL}?callback=handleResponse`);
+</script>
+</body>
+</html>

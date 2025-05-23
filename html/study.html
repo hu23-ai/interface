@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>인터페이스 - 소개</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/about.css" />
+</head>
+<body>
+ <header class="header">
+  <div class="nav-wrapper">
+    <a href="index.html" class="logo-link">
+      <img src="../img/interface_logo.png" alt="인터페이스 로고" width="30" class="logo-img">
+      <span class="logo-text">인터페이스</span>
+    </a>
+    <nav>
+      <ul class="menu">
+        <li class="menu-item"><a href="#">About Us</a></li>
+        <li class="menu-item"><a href="#">커뮤니티</a></li>
+        <li class="menu-item"><a href="#">자료실</a></li>
+        <li class="menu-item"><a href="#">가입안내</a></li>
+        <li class="menu-item"><a href="#">기타사이트</a></li>
+      </ul>
+      <div class="dropdown-panel">
+        <div class="dropdown-inner">
+          <div class="dropdown-column">
+            <a href="about.html">소개</a>
+            <a href="event.html">행사</a>
+            <a href="#">CI</a>
+            <a href="come.html">Contact</a>
+          </div>
+          <div class="dropdown-column">
+            <a href="group.html">소모임</a>
+            <a href="notice_list.html">공지사항</a>
+            <a href="#">주요활동</a>
+            <a href="study.html">스터디</a>
+          </div>
+          <div class="dropdown-column">
+            <a href="rule.html">회칙</a>
+            <a href="#">오디오</a>
+            <a href="calender.html">캘린더</a>
+          </div>
+          <div class="dropdown-column">
+            <a href="#">지원하기</a>
+          </div>
+          <div class="dropdown-column">
+            <a href="chatbot.html">ai챗봇</a>
+            <a href="problem_list.html">코딩테스트</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+
+<main>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f4f4f4;
+      padding: 0px;
+    }
+    h1 { text-align: center; }
+    #studyForm {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      max-width: 600px;
+      margin: 20px auto;
+    }
+    #studyForm input, #studyForm textarea, #studyForm button {
+      width: 97%;
+      margin: 8px 0;
+      padding: 10px;
+      font-size: 1em;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+    #studyList {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .study-card {
+      position: relative;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      padding: 16px 16px 0 16px;
+      margin-bottom: 16px;
+      overflow: hidden;
+      transition: box-shadow 0.16s;
+    }
+    .study-card h3 {
+      margin: 0 0 8px;
+    }
+    .study-card small { color: gray; }
+    .card-controls {
+      position: absolute;
+      top: 12px;
+      right: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 2px;
+      z-index: 10;
+    }
+    .delete-btn {
+      background: none;
+      border: none;
+      font-size: 1.18em;
+      color: #b3b3b3;
+      cursor: pointer;
+      transition: color 0.15s;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-bottom: 2px;
+    }
+    .delete-btn:hover {
+      background: #fee;
+      color: #d23b3b;
+    }
+    .toggle-btn {
+      background: none;
+      border: none;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 1.15em;
+      color: #3a5fbf;
+      cursor: pointer;
+      padding: 1px 6px 1px 2px;
+      border-radius: 4px;
+      user-select: none;
+      transition: color 0.13s;
+      line-height: 1;
+      min-width: 38px;
+    }
+    .toggle-btn .arrow-icon {
+      font-size: 1.19em;
+      display: flex;
+      align-items: center;
+      line-height: 1;
+    }
+    .toggle-btn .comment-count {
+      font-size: 1.07em;
+      display: flex;
+      align-items: center;
+      color: #686868;
+      margin-left: 2px;
+      line-height: 1;
+    }
+    .study-card.expanded .toggle-btn {
+      color: #e7b535;
+    }
+    .study-details {
+      max-height: 0;
+      opacity: 0;
+      transition: max-height 0.4s cubic-bezier(.39,.58,.57,1), opacity 0.18s;
+      overflow: hidden;
+    }
+    .study-card.expanded .study-details {
+      max-height: 420px;
+      opacity: 1;
+      margin-bottom: 18px;
+      transition: max-height 0.55s cubic-bezier(.39,.58,.57,1), opacity 0.32s;
+    }
+    .comment-section {
+      margin-top: 15px;
+      border-top: 1px solid #eef2fa;
+      padding-top: 12px;
+    }
+    .comment-list {
+      margin: 0;
+      padding: 0 0 0 0;
+      list-style: none;
+      max-height: 140px;
+      overflow-y: auto;
+    }
+    .comment-list li {
+      margin-bottom: 6px;
+      background: #f6f9ff;
+      padding: 7px 10px;
+      border-radius: 6px;
+      font-size: 0.98em;
+      color: #2a3043;
+    }
+    .comment-form input, .comment-form textarea {
+      width: 94%;
+      margin: 5px 0;
+      padding: 7px;
+      font-size: 1em;
+      border-radius: 4px;
+      border: 1px solid #b6c4df;
+    }
+    .comment-form button {
+      margin-top: 5px;
+      padding: 6px 16px;
+      font-size: 0.98em;
+      border-radius: 4px;
+      border: none;
+      background: #3564e7;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .comment-form button:hover {
+      background: #284dc1;
+    }
+    @media (max-width: 640px) {
+      .study-card { padding: 14px 4vw 0 4vw; }
+      #studyList { max-width: 99vw; }
+      #studyForm { max-width: 96vw; }
+    }
+  </style>
+
+  <h1>📚 스터디 모집 게시판</h1>
+  <div id="studyForm">
+    <h2>📝 스터디 모집 글 작성</h2>
+    <input type="text" id="title" placeholder="스터디 제목" required>
+    <input type="text" id="author" placeholder="작성자 (닉네임 또는 이름)">
+    <input type="text" id="topic" placeholder="스터디 주제 (예: 파이썬, 알고리즘 등)">
+    <input type="number" id="recruit" placeholder="모집 인원">
+    <input type="date" id="deadline" placeholder="모집 마감일">
+    <textarea id="description" placeholder="스터디 설명" rows="5"></textarea>
+    <button onclick="addStudy()">등록하기</button>
+  </div>
+
+  <div id="studyList">
+    <h2>📋 현재 모집 중인 스터디</h2>
+    <!-- 모집 글이 여기에 추가됩니다 -->
+  </div>
+
+  <script>
+    // 댓글은 studyComments라는 객체에 {스터디id: [댓글,댓글,...]} 형식으로 저장
+    function addStudy() {
+      const title = document.getElementById('title').value;
+      const author = document.getElementById('author').value;
+      const topic = document.getElementById('topic').value;
+      const recruit = document.getElementById('recruit').value;
+      const deadline = document.getElementById('deadline').value;
+      const description = document.getElementById('description').value;
+
+      if (!title || !description) {
+        alert('제목과 설명은 필수입니다.');
+        return;
+      }
+
+      const study = {
+        id: Date.now(),
+        title,
+        author,
+        topic,
+        recruit,
+        deadline,
+        description,
+        createdAt: new Date().toLocaleString()
+      };
+
+      const existing = JSON.parse(localStorage.getItem('studies') || '[]');
+      existing.unshift(study);
+      localStorage.setItem('studies', JSON.stringify(existing));
+      renderStudies();
+      document.getElementById('studyForm').reset();
+    }
+
+    function deleteStudy(id) {
+      let studies = JSON.parse(localStorage.getItem('studies') || '[]');
+      studies = studies.filter(study => study.id !== id);
+      localStorage.setItem('studies', JSON.stringify(studies));
+      // 댓글도 같이 삭제
+      let comments = JSON.parse(localStorage.getItem('studyComments') || '{}');
+      delete comments[id];
+      localStorage.setItem('studyComments', JSON.stringify(comments));
+      renderStudies();
+    }
+
+    // 댓글 추가
+    function addComment(studyId, nameInput, commentInput) {
+      const name = nameInput.value.trim() || '익명';
+      const content = commentInput.value.trim();
+      if (!content) {
+        alert('댓글 내용을 입력해 주세요.');
+        return;
+      }
+      let comments = JSON.parse(localStorage.getItem('studyComments') || '{}');
+      if (!comments[studyId]) comments[studyId] = [];
+      comments[studyId].push({
+        name,
+        content,
+        createdAt: new Date().toLocaleString()
+      });
+      localStorage.setItem('studyComments', JSON.stringify(comments));
+      nameInput.value = '';
+      commentInput.value = '';
+      renderStudies();
+      setTimeout(() => {
+        const detail = document.querySelector(`[data-study-id="${studyId}"] .study-details`);
+        if (detail) detail.scrollTop = detail.scrollHeight;
+      }, 10);
+    }
+
+    // 댓글 개수 반환
+    function getCommentCount(studyId) {
+      let comments = JSON.parse(localStorage.getItem('studyComments') || '{}');
+      return comments[studyId] ? comments[studyId].length : 0;
+    }
+
+    // 스터디 카드 펼침 상태 관리
+    let expandedCards = {};
+
+    function toggleDetails(studyId) {
+      expandedCards[studyId] = !expandedCards[studyId];
+      renderStudies();
+      if (expandedCards[studyId]) {
+        setTimeout(() => {
+          const detail = document.querySelector(`[data-study-id="${studyId}"] .study-details`);
+          if (detail) detail.scrollTop = detail.scrollHeight;
+        }, 20);
+      }
+    }
+
+    function renderStudies() {
+      const studyList = document.getElementById('studyList');
+      const studies = JSON.parse(localStorage.getItem('studies') || '[]');
+      const commentsData = JSON.parse(localStorage.getItem('studyComments') || '{}');
+      const cards = studies.map(study => {
+        const isExpanded = !!expandedCards[study.id];
+        const commentCount = getCommentCount(study.id);
+        const toggleIcon = isExpanded ? '▲' : '▼';
+        const commentList = (commentsData[study.id] || []).map(c =>
+          `<li><b>${c.name}</b>: ${c.content} <small style="float:right;">${c.createdAt}</small></li>`
+        ).join('');
+        return `
+          <div class="study-card${isExpanded ? ' expanded' : ''}" data-study-id="${study.id}">
+            <div class="card-controls">
+              <button class="delete-btn" title="삭제" onclick="deleteStudy(${study.id})">🗑️</button>
+              <button class="toggle-btn" title="댓글 보기" onclick="toggleDetails(${study.id})">
+                <span class="arrow-icon">${toggleIcon}</span>
+                <span class="comment-count">댓글(${commentCount})</span>
+              </button>
+            </div>
+            <h3>${study.title}</h3>
+            <small>작성자: ${study.author || '익명'} / 주제: ${study.topic || '기타'} / 마감: ${study.deadline || '미정'}</small>
+            <p>${study.description}</p>
+            <small>등록일: ${study.createdAt}</small>
+            <div class="study-details">
+              <div class="comment-section">
+                <form class="comment-form" onsubmit="event.preventDefault(); addComment(${study.id}, this.name, this.comment);">
+                  <input type="text" name="name" placeholder="닉네임(선택)">
+                  <textarea name="comment" placeholder="댓글을 입력하세요" rows="2"></textarea>
+                  <button type="submit">댓글 등록</button>
+                </form>
+                <ul class="comment-list">
+                  ${commentList || `<li style="color:#999;">아직 댓글이 없습니다.</li>`}
+                </ul>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+      studyList.innerHTML = `<h2>📋 현재 모집 중인 스터디</h2>` + cards;
+    }
+
+    window.deleteStudy = deleteStudy;
+    window.toggleDetails = toggleDetails;
+    window.addComment = addComment;
+
+    expandedCards = {};
+    renderStudies();
+  </script>
+</main>
+
+
+
+  <footer class="footer">
+    <p>&copy; 2025 인터페이스. All rights reserved.</p>
+  </footer>
+  <script src="../js/main.js"></script>
+</body>
+</html>

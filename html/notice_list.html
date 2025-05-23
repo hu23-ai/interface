@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>인터페이스 - 공지사항</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/about.css" />
+</head>
+<body>
+ <header class="header">
+  <div class="nav-wrapper">
+    <a href="index.html" class="logo-link">
+      <img src="../img/interface_logo.png" alt="인터페이스 로고" width="30" class="logo-img">
+      <span class="logo-text">인터페이스</span>
+    </a>
+    <nav>
+      <ul class="menu">
+        <li class="menu-item"><a href="#">About Us</a></li>
+        <li class="menu-item"><a href="#">커뮤니티</a></li>
+        <li class="menu-item"><a href="#">자료실</a></li>
+        <li class="menu-item"><a href="#">가입안내</a></li>
+        <li class="menu-item"><a href="#">기타사이트</a></li>
+      </ul>
+      <div class="dropdown-panel">
+        <div class="dropdown-inner">
+          <div class="dropdown-column">
+            <a href="about.html">소개</a>
+            <a href="event.html">행사</a>
+            <a href="#">CI</a>
+            <a href="come.html">Contact</a>
+          </div>
+          <div class="dropdown-column">
+            <a href="group.html">소모임</a>
+            <a href="notice_list.html">공지사항</a>
+            <a href="#">주요활동</a>
+            <a href="study.html">스터디</a>
+          </div>
+          <div class="dropdown-column">
+            <a href="rule.html">회칙</a>
+            <a href="#">오디오</a>
+            <a href="calender.html">캘린더</a>
+          </div>
+          <div class="dropdown-column">
+            <a href="#">지원하기</a>
+          </div>
+          <div class="dropdown-column">
+            <a href="chatbot.html">ai챗봇</a>
+            <a href="problem_list.html">코딩테스트</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+  <main>
+    <section class="notice-container">
+      <div class="notice-header">
+        <h1>공지사항</h1>
+        <a href="notice_write.html" class="btn-write">글 쓰기</a>
+      </div>
+
+      <table class="notice-table">
+        <thead>
+          <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>작성일</th>
+          </tr>
+        </thead>
+        <tbody id="notice-tbody">
+          <!-- JS 생성 -->
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2025 인터페이스. All rights reserved.</p>
+  </footer>
+  
+  <script>
+    function loadNotices() {
+      const notices = JSON.parse(localStorage.getItem('notices') || '[]');
+      const tbody   = document.getElementById('notice-tbody');
+      tbody.innerHTML = '';
+      notices.slice().reverse().forEach((n,i) => {
+        const idx = notices.length - i;
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${idx}</td>
+          <td><a href="notice_detail.html?idx=${idx-1}">${n.title}</a></td>
+          <td>${n.author}</td>
+          <td>${n.date}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+    document.addEventListener('DOMContentLoaded', loadNotices);
+  </script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

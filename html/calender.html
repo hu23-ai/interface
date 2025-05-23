@@ -1,0 +1,257 @@
+  <main>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>인터페이스 - 소개</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/about.css" />
+</head>
+<body>
+ <header class="header">
+  <div class="nav-wrapper">
+    <a href="index.html" class="logo-link">
+      <img src="../img/interface_logo.png" alt="인터페이스 로고" width="30" class="logo-img">
+      <span class="logo-text">인터페이스</span>
+    </a>
+    <nav>
+      <ul class="menu">
+        <li class="menu-item"><a href="#">About Us</a></li>
+        <li class="menu-item"><a href="#">커뮤니티</a></li>
+        <li class="menu-item"><a href="#">자료실</a></li>
+        <li class="menu-item"><a href="#">가입안내</a></li>
+        <li class="menu-item"><a href="#">기타사이트</a></li>
+      </ul>
+      <div class="dropdown-panel">
+        <div class="dropdown-inner">
+          <div class="dropdown-column">
+            <a href="about.html">소개</a>
+            <a href="event.html">행사</a>
+            <a href="#">CI</a>
+            <a href="come.html">Contact</a>
+          </div>
+          <div class="dropdown-column">
+            <a href="group.html">소모임</a>
+            <a href="notice_list.html">공지사항</a>
+            <a href="#">주요활동</a>
+            <a href="study.html">스터디</a>
+          </div>
+          <div class="dropdown-column">
+            <a href="rule.html">회칙</a>
+            <a href="#">오디오</a>
+            <a href="calender.html">캘린더</a>
+          </div>
+          <div class="dropdown-column">
+            <a href="#">지원하기</a>
+          </div>
+          <div class="dropdown-column">
+            <a href="chatbot.html">ai챗봇</a>
+            <a href="problem_list.html">코딩테스트</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+
+<main>
+  <div class="calendar-container">
+    <div class="calendar-header">
+      <button class="calendar-btn" onclick="changeMonth(-1)">&#8249;</button>
+      <h2 id="calendarMonthYear"></h2>
+      <button class="calendar-btn" onclick="changeMonth(1)">&#8250;</button>
+    </div>
+    <div class="calendar-grid calendar-days-name">
+      <div>일</div><div>월</div><div>화</div><div>수</div><div>목</div><div>금</div><div>토</div>
+    </div>
+    <div class="calendar-grid" id="calendarDates"></div>
+  </div>
+
+  <style>
+    .calendar-container {
+      width: 900px;
+      margin: 48px auto 0 auto;
+      background: #fff;
+      border-radius: 22px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.13);
+      padding: 36px 36px 44px 36px;
+      font-family: 'Segoe UI', 'Noto Sans KR', sans-serif;
+    }  
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 22px;
+    }
+    .calendar-header h2 {
+      margin: 0;
+      font-size: 2.1rem;
+      font-weight: bold;
+      letter-spacing: 1.5px;
+    }
+    .calendar-btn {
+      background: none;
+      border: none;
+      font-size: 2.2rem;
+      color: #3f8efc;
+      cursor: pointer;
+      transition: color 0.15s;
+    }
+    .calendar-btn:hover { color: #034078; }
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+    }
+    .calendar-days-name {
+      text-align: center;
+      font-weight: bold;
+      color: #555;
+      margin-bottom: 11px;
+      font-size: 1.33rem;
+      letter-spacing: 0.5px;
+    }
+    .calendar-date-cell {
+      min-height: 78px;
+      text-align: right;
+      vertical-align: top;
+      padding: 13px 10px 7px 7px;
+      background: #f3f5fa;
+      border-radius: 13px;
+      position: relative;
+      font-size: 1.27rem;
+      color: #222;
+      transition: box-shadow 0.2s;
+      box-shadow: 0 1px 3px rgba(63,142,252,0.03);
+    }
+    .calendar-date-cell.today {
+      border: 2.5px solid #3f8efc;
+      background: #e6f0ff;
+      color: #034078;
+      font-weight: bold;
+      box-shadow: 0 2px 8px rgba(63,142,252,0.11);
+      z-index: 1;
+    }
+    .calendar-events {
+      margin-top: 10px;
+      text-align: left;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px 5px;
+    }
+    .calendar-event {
+      display: inline-block;
+      background: #d1e7ff;
+      color: #034078;
+      font-size: 1.05rem;
+      padding: 3.5px 12px;
+      border-radius: 7px;
+      margin-bottom: 2px;
+      margin-right: 3px;
+      white-space: nowrap;
+      font-weight: 500;
+      box-shadow: 0 1px 3px rgba(63,142,252,0.04);
+      letter-spacing: 0.1px;
+    }
+  </style>
+
+  <script>
+    // 일정 데이터 예시
+    const calendarEvents = {
+      "2025-02-3": ["방중모임"],
+      "2025-02-14": ["환송회"],
+      "2025-03-5": ["세동제"],
+      "2025-03-6": ["세동제"],
+      "2025-03-7": ["개강총회"],
+      "2025-03-12": ["신환회"],
+      "2025-03-18": ["사물함쟁탈전"],
+      "2025-04-2": ["봄나들이"],
+      "2025-04-4": ["봄나들이"],
+      "2025-04-4": ["기장선출"],
+      "2025-04-15": ["간식행사"],
+      "2025-04-16": ["간식행사"],
+      "2025-05-23": ["인커톤 시작"],
+      "2025-05-24": ["인커톤 끝"],
+      "2025-05-26": ["유니티견학"],
+      "2025-05-27": ["게임대회"],
+      "2025-05-28": ["게임대회"],
+    };
+
+    let today = new Date();
+    let viewYear = today.getFullYear();
+    let viewMonth = today.getMonth();
+
+    function pad(n) { return n < 10 ? '0' + n : n; }
+
+    function renderCalendar() {
+      const datesDiv = document.getElementById('calendarDates');
+      const header = document.getElementById('calendarMonthYear');
+      datesDiv.innerHTML = "";
+
+      // 월, 연도 표시
+      header.textContent = `${viewYear}년 ${viewMonth + 1}월`;
+
+      // 해당 월의 1일, 마지막 날짜
+      const firstDay = new Date(viewYear, viewMonth, 1);
+      const lastDate = new Date(viewYear, viewMonth + 1, 0).getDate();
+      const startDay = firstDay.getDay();
+
+      // 시작 빈칸
+      for (let i = 0; i < startDay; i++) {
+        datesDiv.innerHTML += `<div></div>`;
+      }
+
+      // 날짜 채우기
+      for (let date = 1; date <= lastDate; date++) {
+        const isToday =
+          viewYear === today.getFullYear() &&
+          viewMonth === today.getMonth() &&
+          date === today.getDate();
+
+        const dateKey = `${viewYear}-${pad(viewMonth + 1)}-${pad(date)}`;
+        let eventsHtml = "";
+        if (calendarEvents[dateKey]) {
+          eventsHtml =
+            `<div class="calendar-events">` +
+            calendarEvents[dateKey].map(ev =>
+              `<div class="calendar-event">${ev}</div>`
+            ).join('') +
+            `</div>`;
+        }
+
+        datesDiv.innerHTML += `
+          <div class="calendar-date-cell${isToday ? ' today' : ''}">
+            ${date}
+            ${eventsHtml}
+          </div>
+        `;
+      }
+    }
+
+    function changeMonth(offset) {
+      viewMonth += offset;
+      if (viewMonth < 0) {
+        viewYear--;
+        viewMonth = 11;
+      } else if (viewMonth > 11) {
+        viewYear++;
+        viewMonth = 0;
+      }
+      renderCalendar();
+    }
+
+    renderCalendar();
+  </script>
+</main>
+
+
+
+  <footer class="footer">
+    <p>&copy; 2025 인터페이스. All rights reserved.</p>
+  </footer>
+  <script src="../js/main.js"></script>
+</body>
+</html>

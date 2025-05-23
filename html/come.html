@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>인터페이스 - 소개</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/about.css" />
+</head>
+<body>
+ <header class="header">
+  <div class="nav-wrapper">
+    <a href="index.html" class="logo-link">
+      <img src="../img/interface_logo.png" alt="인터페이스 로고" width="30" class="logo-img">
+      <span class="logo-text">인터페이스</span>
+    </a>
+    <nav>
+      <ul class="menu">
+        <li class="menu-item"><a href="#">About Us</a></li>
+        <li class="menu-item"><a href="#">커뮤니티</a></li>
+        <li class="menu-item"><a href="#">자료실</a></li>
+        <li class="menu-item"><a href="#">가입안내</a></li>
+        <li class="menu-item"><a href="#">기타사이트</a></li>
+      </ul>
+      <div class="dropdown-panel">
+        <div class="dropdown-inner">
+          <div class="dropdown-column">
+            <a href="about.html">소개</a>
+            <a href="event.html">행사</a>
+            <a href="#">CI</a>
+            <a href="come.html">Contact</a>
+          </div>
+          <div class="dropdown-column">
+            <a href="group.html">소모임</a>
+            <a href="notice_list.html">공지사항</a>
+            <a href="#">주요활동</a>
+            <a href="study.html">스터디</a>
+          </div>
+          <div class="dropdown-column">
+            <a href="rule.html">회칙</a>
+            <a href="#">오디오</a>
+            <a href="calender.html">캘린더</a>
+          </div>
+          <div class="dropdown-column">
+            <a href="#">지원하기</a>
+          </div>
+          <div class="dropdown-column">
+            <a href="chatbot.html">ai챗봇</a>
+            <a href="problem_list.html">코딩테스트</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+<main class="contact-main">
+  <style>
+    .contact-main {
+      font-family: 'Noto Sans KR', sans-serif;
+      max-width: 700px;
+      margin: 45px auto 30px auto;
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 6px 36px 0 rgba(40,60,100,0.09);
+      padding: 38px 24px 28px 24px;
+      color: #1c2431;
+    }
+    .contact-main .contact-header h1 {
+      font-size: 2.1em;
+      color: #3564e7;
+      margin-bottom: 5px;
+      letter-spacing: -0.03em;
+    }
+    .contact-main .contact-header p {
+      font-size: 1.08em;
+      color: #20294a;
+      margin-bottom: 26px;
+      line-height: 1.7;
+    }
+    .contact-main .contact-info {
+      background: #f6f9fe;
+      border-radius: 14px;
+      padding: 20px 18px 14px 18px;
+      margin-bottom: 32px;
+      box-shadow: 0 2px 16px 0 rgba(53,100,231,0.06);
+    }
+    .contact-main .contact-info dl {
+      margin: 0;
+      padding: 0;
+    }
+    .contact-main .contact-info dt {
+      font-weight: bold;
+      color: #22319c;
+      margin-top: 16px;
+      margin-bottom: 5px;
+      font-size: 1.04em;
+    }
+    .contact-main .contact-info dd {
+      margin-left: 0;
+      margin-bottom: 6px;
+      font-size: 1em;
+      color: #384052;
+    }
+    .contact-main .contact-info ul {
+      padding-left: 18px;
+      margin: 0;
+      margin-bottom: 0;
+    }
+    .contact-main .contact-info li {
+      margin-bottom: 2px;
+    }
+    .contact-main .contact-map h2 {
+      font-size: 1.17em;
+      color: #2567e7;
+      font-weight: 600;
+      margin: 18px 0 9px 0;
+      letter-spacing: -0.01em;
+    }
+    .contact-main #kakao-map {
+      width: 100%;
+      height: 340px;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-top: 6px;
+      box-shadow: 0 2px 14px 0 rgba(60,80,240,0.10);
+    }
+    @media (max-width: 600px) {
+      .contact-main {
+        padding: 18px 4vw;
+        font-size: 0.97em;
+      }
+      .contact-main #kakao-map {
+        height: 230px;
+      }
+    }
+  </style>
+
+  <section class="contact-header">
+    <h1>오시는 길</h1>
+    <p>
+      세종대학교 학생회관 518호에서 만날 수 있습니다.<br>
+      언제든 방문해 주세요!
+    </p>
+  </section>
+
+  <section class="contact-info">
+    <dl>
+      <dt>주소</dt>
+      <dd>서울특별시 광진구 능동로 209<br>세종대학교 학생회관 518호</dd>
+      <dt>교통</dt>
+      <dd>
+        <ul>
+          <li><b>지하철:</b> 7호선 어린이대공원역 6번 출구 도보 5분</li>
+          <li><b>버스:</b> 세종대학교 정문/후문 하차</li>
+        </ul>
+      </dd>
+      <dt>연락처</dt>
+      <dd>
+        <ul>
+          <li>이메일: interface@sejong.ac.kr</li>
+        </ul>
+      </dd>
+    </dl>
+  </section>
+
+  <section class="contact-map">
+    <h2>지도</h2>
+    <div id="kakao-map"></div>
+  </section>
+
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=99f9350185b06d33b335eb8a412f688d"></script>
+  <script>
+    // 세종대학교 학생회관 위치
+    var mapContainer = document.getElementById('kakao-map');
+    var mapOption = {
+      center: new kakao.maps.LatLng(37.551214, 127.073792), // 세종대 학생회관 인근 좌표
+      level: 3
+    };
+    var map = new kakao.maps.Map(mapContainer, mapOption);
+
+    // 마커
+    var marker = new kakao.maps.Marker({
+      position: new kakao.maps.LatLng(37.551214, 127.073792),
+      map: map
+    });
+
+    // 인포윈도우
+    var iwContent = '<div style="padding:8px 14px 8px 6px;font-size:1em;">세종대 인터페이스<br><span style="font-size:0.92em;color:#3564e7;">학생회관 518호</span></div>';
+    var infowindow = new kakao.maps.InfoWindow({
+      content : iwContent
+    });
+    infowindow.open(map, marker);
+  </script>
+</main>
+
+
+  <footer class="footer">
+    <p>&copy; 2025 인터페이스. All rights reserved.</p>
+  </footer>
+  <script src="../js/main.js"></script>
+</body>
+</html>

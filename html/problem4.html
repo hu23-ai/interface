@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>인터페이스 - 상급 파이썬 문제</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/about.css" />
+</head>
+<body>
+ <header class="header">
+  <div class="nav-wrapper">
+    <a href="index.html" class="logo-link">
+      <img src="../img/interface_logo.png" alt="인터페이스 로고" width="30" class="logo-img">
+      <span class="logo-text">인터페이스</span>
+    </a>
+    <nav>
+      <ul class="menu">
+        <li class="menu-item"><a href="#">About Us</a></li>
+        <li class="menu-item"><a href="#">커뮤니티</a></li>
+        <li class="menu-item"><a href="#">자료실</a></li>
+        <li class="menu-item"><a href="#">가입안내</a></li>
+        <li class="menu-item"><a href="#">기타사이트</a></li>
+      </ul>
+      <div class="dropdown-panel">
+        <div class="dropdown-inner">
+          <div class="dropdown-column">
+            <a href="about.html">소개</a>
+            <a href="event.html">행사</a>
+            <a href="#">CI</a>
+            <a href="come.html">Contact</a>
+          </div>
+          <div class="dropdown-column">
+            <a href="group.html">소모임</a>
+            <a href="notice_list.html">공지사항</a>
+            <a href="#">주요활동</a>
+            <a href="study.html">스터디</a>
+          </div>
+          <div class="dropdown-column">
+            <a href="rule.html">회칙</a>
+            <a href="#">오디오</a>
+            <a href="calender.html">캘린더</a>
+          </div>
+          <div class="dropdown-column">
+            <a href="#">지원하기</a>
+          </div>
+          <div class="dropdown-column">
+            <a href="chatbot.html">ai챗봇</a>
+            <a href="problem_list.html">코딩테스트</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="about-container" style="flex-direction: column;">
+  <div class="intro-text" style="max-width: 750px;">
+    <h1>온라인 코딩 채점 데모</h1>
+    <h2>문제: 회전하는 큐</h2>
+    <p>
+      <b>함수명: solution(n, m, targets)</b><br>
+      <b>입력:</b><br>
+      - n: 큐의 길이(정수, 1 ≤ n ≤ 100)<br>
+      - m: 뽑을 수의 개수(정수, 1 ≤ m ≤ n)<br>
+      - targets: 뽑을 수가 담긴 리스트(길이 m, 모두 1~n 내의 서로 다른 정수)<br>
+      <b>출력:</b><br>
+      - 회전 연산의 최소 총 횟수(정수)를 <b>return</b> 하세요.<br><br>
+      예시 정답:<br>
+      <code>def solution(n, m, targets):<br>
+&nbsp;&nbsp;from collections import deque<br>
+&nbsp;&nbsp;q = deque(range(1, n+1))<br>
+&nbsp;&nbsp;cnt = 0<br>
+&nbsp;&nbsp;for target in targets:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;while q[0] != target:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;left = q.index(target)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;right = len(q) - left<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if left &lt;= right:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;q.rotate(-1)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cnt += 1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;q.rotate(1)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cnt += 1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;q.popleft()<br>
+&nbsp;&nbsp;return cnt</code>
+    </p>
+  </div>
+  <div style="width: 100%; max-width: 800px; margin: 2rem auto;">
+    <textarea id="code" rows="16" style="width: 100%; font-size: 1.1rem; font-family: 'Fira Mono', 'Consolas', monospace; border-radius: 8px; padding: 1rem;">def solution(n, m, targets):
+    # 여기에 코드를 작성하세요.
+    pass
+</textarea>
+    <br>
+    <button onclick="runPython2()" style="margin-top: 12px; padding: 10px 24px; font-size: 1.1rem; border-radius: 7px; background: #3686ff; color: white; border: none; cursor: pointer;">채점하기</button>
+    <div id="result2" style="margin-top: 1.2rem; font-size: 1.15rem;"></div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+  <script>
+    let pyodideReady2 = false;
+    let pyodide2 = null;
+
+    async function initPyodide2() {
+      pyodide2 = await loadPyodide();
+      pyodideReady2 = true;
+    }
+    initPyodide2();
+
+    // 여러 테스트케이스
+    const testcases = [
+      {input: [10, 3, [1,2,3]], answer: 0},
+      {input: [10, 3, [2,9,5]], answer: 8},
+      {input: [32, 6, [27, 16, 30, 11, 6, 23]], answer: 59},
+      {input: [20, 5, [10, 20, 15, 12, 1]], answer: 19},
+      {input: [7, 3, [6, 2, 7]], answer: 7},
+      {input: [1, 1, [1]], answer: 0}
+    ];
+
+    async function runPython2() {
+      if (!pyodideReady2) {
+        document.getElementById('result2').innerText = "Python 엔진 로딩 중...";
+        return;
+      }
+      const userCode = document.getElementById('code').value;
+      let results = [];
+      let isAllCorrect = true;
+      try {
+        await pyodide2.runPythonAsync(userCode);
+        for (let i = 0; i < testcases.length; i++) {
+          const test = testcases[i];
+          let pyInput = `solution(${test.input[0]}, ${test.input[1]}, ${test.input[2]})`;
+          let output;
+          try {
+            output = pyodide2.runPython(pyInput);
+          } catch (e) {
+            results.push(`테스트 ${i+1}: 실행 오류`);
+            isAllCorrect = false;
+            continue;
+          }
+          if (parseInt(output) === test.answer) {
+            results.push(`테스트 ${i+1}: <b>정답</b>`);
+          } else {
+            results.push(`테스트 ${i+1}: <span style="color:red">오답</span> (기댓값: ${test.answer}, 결과: ${output})`);
+            isAllCorrect = false;
+          }
+        }
+        document.getElementById('result2').innerHTML =
+          (isAllCorrect ? "모든 테스트를 통과했습니다! 🎉<br><br>" : "일부 테스트 실패<br><br>")
+          + results.join('<br>');
+      } catch (e) {
+        document.getElementById('result2').innerText = "코드 실행 오류: " + e;
+      }
+    }
+  </script>
+</section>
+
+</main>
+
+<footer class="footer">
+  <p>&copy; 2025 인터페이스. All rights reserved.</p>
+</footer>
+<script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,354 @@
+.about-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  gap: 3rem;
+}
+
+.about-text {
+  max-width: 800px;
+  text-align: center;
+}
+
+.about-text h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.about-text h2 {
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: #555;
+  margin-bottom: 1.5rem;
+}
+
+/*.about-text h3 {
+  font-size: 1.1rem;      
+  line-height: 1.2;       
+  margin-top: 0;         
+  margin-bottom: 0.5em; 
+}*/
+
+.about-text h4 {
+  font-size: 2.0rem;
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 1.5rem;
+}
+
+.about-text h5 {
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: #555;
+  margin-bottom: 1.5rem;
+}
+
+.about-text p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #444;
+}
+
+.about-image img {
+  max-width: 400px;
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+
+.activities {
+  text-align: center;
+  margin: 2.5rem 0;
+}
+
+.activities h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1.2rem;
+  font-weight: 600;
+}
+
+.activities ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 700px;
+}
+
+.activities li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  text-align: left;
+  font-size: 1.3rem;
+  line-height: 1.5;
+  color: #444;
+}
+
+.activities li::before {
+  content: "✔️";
+  flex-shrink: 0;
+  margin-top: 0.3rem;
+  font-size: 1.3rem;
+}
+
+/* ─── 공통 section 스타일 ─── */
+.section {
+  text-align: center;
+  margin: 3rem 0;
+}
+.section-title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+}
+.section-content {
+  max-width: 700px;
+  margin: 0 auto;
+}
+.section-content p {
+  font-size: 1.4rem;
+  line-height: 1.6;
+  color: #444;
+  margin: 1.2rem 0;
+}
+.section-content img {
+  width: 100%;
+  max-width: 700px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  margin: 1.5rem auto;
+  display: block;
+}
+
+/* (선택) 인스타그램 링크 커스텀 */
+.section--social .section-content a {
+  font-size: 1.4rem;
+  color: #007bff;
+  text-decoration: none;
+}
+.section--social .section-content a:hover {
+  text-decoration: underline;
+}
+
+/* ─── 추천 대상 섹션 ─── */
+.recommendations {
+  text-align: center;
+  margin: 3rem 0 1.5rem;  /* 위아래 간격 조절 */
+}
+.recommendations h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+.recommendations ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 700px;
+}
+.recommendations li {
+  font-size: 1.3rem;
+  line-height: 1.6;
+  color: #444;
+  margin-bottom: 0.75rem;
+  position: relative;
+  padding-left: 1.5rem;
+  text-align: left;
+}
+.recommendations li::before {
+  content: "👉";
+  position: absolute;
+  left: 0;
+  top: 0.2rem;
+}
+/* about.css 맨 아래에 추가하세요 */
+
+/* 리스트 전체를 inline-block 으로 묶고 내부는 text-align:left */
+.recommendations ul,
+.activities ul {
+  display: inline-block;  /* 블록의 너비는 내용만큼 */
+  text-align: left;       /* 내부 항목은 왼쪽 정렬 */
+  padding: 0;
+  margin: 0 auto 1.5rem;  /* 섹션 중간 여백 */
+  max-width: 700px;       /* 필요에 따라 조절 */
+}
+
+/* 기존 li 스타일 유지 (아이콘, 폰트 크기 등) */
+.recommendations li,
+.activities li {
+  /* flex 등 기존 스타일이 있다면 그대로 둡니다 */
+}
+/* ─── 공지사항 페이지 공통 스타일 ─── */
+/* 최대 너비, 중앙정렬, 흰 배경 카드 스타일 */
+.notice-container,
+.notice-form-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+}
+
+/* 제목 영역 */
+.notice-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 1.5rem;
+}
+.notice-header h1 {
+  font-size: 2rem;
+  color: #222;
+  margin: 0;
+}
+.notice-header .btn-write {
+  background-color: #3686ff;
+  color: #fff;
+  padding: 0.6rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.notice-header .btn-write:hover {
+  background-color: #246bcc;
+}
+
+/* 테이블 스타일 */
+.notice-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+  color: #333;
+}
+.notice-table thead {
+  background-color: #3686ff;
+  color: #fff;
+}
+.notice-table th,
+.notice-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #e0e0e0;
+  text-align: left;
+}
+.notice-table tbody tr:nth-child(even) {
+  background: #f9f9f9;
+}
+.notice-table a {
+  color: #3686ff;
+  text-decoration: none;
+}
+.notice-table a:hover {
+  text-decoration: underline;
+}
+
+/* 글쓰기 폼 스타일 */
+.notice-form-container h1 {
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  color: #222;
+}
+.notice-form-container .field {
+  margin-bottom: 1.5rem;
+}
+.notice-form-container .field label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #333;
+}
+.notice-form-container .field input,
+.notice-form-container .field textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fafafa;
+  color: #222;
+  transition: border-color .2s;
+}
+.notice-form-container .field input:focus,
+.notice-form-container .field textarea:focus {
+  outline: none;
+  border-color: #3686ff;
+}
+.notice-form-container .btn-submit {
+  display: inline-block;
+  background-color: #3686ff;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.notice-form-container .btn-submit:hover {
+  background-color: #246bcc;
+}
+
+/* ─── fade-in 애니메이션 ─── */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s cubic-bezier(.7, .2, .2, 1), transform 0.7s cubic-bezier(.7, .2, .2, 1);
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ─── hover 효과 ─── */
+.section,
+.recommendations,
+.activities {
+  transition: box-shadow 0.22s, transform 0.27s;
+}
+.section:hover,
+.recommendations:hover,
+.activities:hover {
+  box-shadow: 0 8px 32px rgba(50,80,210,0.11), 0 1.5px 8px rgba(0,0,0,0.09);
+  transform: scale(1.017);
+  z-index: 2;
+}
+.section-content img,
+.section img {
+  border-radius: 12px;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.08);
+  transition: transform 0.22s, box-shadow 0.21s;
+  max-width: 100%;
+}
+.section-content img:hover,
+.section img:hover {
+  transform: scale(1.06) rotate(-2deg);
+  box-shadow: 0 8px 32px rgba(50,80,210,0.13), 0 1.5px 8px rgba(0,0,0,0.14);
+}
+
+/* 인스타그램 버튼 gradient & 효과 */
+.section--social .section-content a {
+  display: inline-block;
+  background: linear-gradient(90deg, #feda75 5%, #fa7e1e 40%, #d62976 70%, #962fbf 100%);
+  color: white !important;
+  font-weight: bold;
+  padding: 8px 24px;
+  border-radius: 24px;
+  box-shadow: 0 1px 8px rgba(240,80,210,0.11);
+  font-size: 1.07rem;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s, filter 0.23s;
+  margin-top: 8px;
+}
+.section--social .section-content a:hover {
+  transform: scale(1.08) rotate(-1.5deg);
+  filter: brightness(1.09) contrast(1.1);
+  box-shadow: 0 6px 24px #d6297680, 0 1.5px 8px rgba(0,0,0,0.10);
+}

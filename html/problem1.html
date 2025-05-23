@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>인터페이스 - 소개</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/about.css" />
+</head>
+<body>
+ <header class="header">
+  <div class="nav-wrapper">
+    <a href="index.html" class="logo-link">
+      <img src="../img/interface_logo.png" alt="인터페이스 로고" width="30" class="logo-img">
+      <span class="logo-text">인터페이스</span>
+    </a>
+    <nav>
+      <ul class="menu">
+        <li class="menu-item"><a href="#">About Us</a></li>
+        <li class="menu-item"><a href="#">커뮤니티</a></li>
+        <li class="menu-item"><a href="#">자료실</a></li>
+        <li class="menu-item"><a href="#">가입안내</a></li>
+        <li class="menu-item"><a href="#">기타사이트</a></li>
+      </ul>
+      <div class="dropdown-panel">
+        <div class="dropdown-inner">
+          <div class="dropdown-column">
+            <a href="about.html">소개</a>
+            <a href="event.html">행사</a>
+            <a href="#">CI</a>
+            <a href="come.html">Contact</a>
+          </div>
+          <div class="dropdown-column">
+            <a href="group.html">소모임</a>
+            <a href="notice_list.html">공지사항</a>
+            <a href="#">주요활동</a>
+            <a href="study.html">스터디</a>
+          </div>
+          <div class="dropdown-column">
+            <a href="rule.html">회칙</a>
+            <a href="#">오디오</a>
+            <a href="calender.html">캘린더</a>
+          </div>
+          <div class="dropdown-column">
+            <a href="#">지원하기</a>
+          </div>
+          <div class="dropdown-column">
+            <a href="chatbot.html">ai챗봇</a>
+            <a href="problem_list.html">코딩테스트</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+  <main>
+<section class="about-container" style="flex-direction: column;">
+  <div class="intro-text" style="max-width: 650px;">
+    <h1>인터페이스 코딩테스트</h1>
+    <h2>문제: Hello World를 출력하는 함수를 작성하세요.</h2>
+    <p>아래 입력창에 <b>solution()</b> 함수를 작성해 “Hello World”를 출력하세요.<br>
+    예시 정답:<br>
+    <code>def solution():<br>&nbsp;&nbsp;print("Hello World")</code></p>
+  </div>
+  <div style="width: 100%; max-width: 700px; margin: 2rem auto;">
+    <textarea id="code" rows="7" style="width: 100%; font-size: 1.1rem; font-family: 'Fira Mono', 'Consolas', monospace; border-radius: 8px; padding: 1rem;">def solution():
+    print("Hello World")</textarea>
+    <br>
+    <button onclick="runPython()" style="margin-top: 12px; padding: 10px 24px; font-size: 1.1rem; border-radius: 7px; background: #3686ff; color: white; border: none; cursor: pointer;">채점하기</button>
+    <div id="result" style="margin-top: 1.2rem; font-size: 1.15rem;"></div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+  <script>
+    let pyodideReady = false;
+    let pyodide = null;
+
+    async function initPyodide() {
+      pyodide = await loadPyodide();
+      pyodideReady = true;
+    }
+    initPyodide();
+
+    async function runPython() {
+      if (!pyodideReady) {
+        document.getElementById('result').innerText = "Python 엔진 로딩 중...";
+        return;
+      }
+      const userCode = document.getElementById('code').value;
+      try {
+        pyodide.runPython(`
+import sys
+from io import StringIO
+output_buffer = StringIO()
+sys.stdout = output_buffer
+`);
+        await pyodide.runPythonAsync(userCode + '\nsolution()');
+        const output = pyodide.runPython('output_buffer.getvalue().strip()');
+        const isCorrect = output === "Hello World";
+        document.getElementById('result').innerHTML =
+          isCorrect ? "정답입니다! 🎉<br>출력: <b>" + output + "</b>"
+                    : "오답입니다.<br>출력: <b>" + output + "</b>";
+      } catch (e) {
+        document.getElementById('result').innerText = "코드 실행 오류: " + e;
+      }
+    }
+  </script>
+</section>
+
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2025 인터페이스. All rights reserved.</p>
+  </footer>
+  <script src="../js/main.js"></script>
+</body>
+</html>
